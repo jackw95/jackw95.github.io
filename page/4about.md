@@ -13,5 +13,5 @@ type: page
 
 
 ### 联系我
-* GitHub：[Gaohaoyang](https://github.com/wzhao95)
+* GitHub：[wzhao95](https://github.com/wzhao95)
 * email：wzhao_hb@163.com
