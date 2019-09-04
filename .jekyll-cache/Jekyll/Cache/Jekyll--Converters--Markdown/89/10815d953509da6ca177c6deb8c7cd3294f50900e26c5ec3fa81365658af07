@@ -1,0 +1,222 @@
+I"PF<ul id="markdown-toc">
+  <li><a href="#css" id="markdown-toc-css"><code class="highlighter-rouge">CSS</code></a></li>
+</ul>
+
+<h4 id="css"><code class="highlighter-rouge">CSS</code></h4>
+
+<p><strong><code class="highlighter-rouge">Cascading Style Sheet</code>，层叠样式表，将网页内容和显示样式分离，提高程序性能。</strong></p>
+
+<p><em>它是一种专门描述结构文档的表现方式的文档，主要用于网页风格设计，包括字体大小、颜色、以及元素的精确定位。在传统的<code class="highlighter-rouge">web</code>网页设计里，使得<code class="highlighter-rouge">css</code>能让单调的<code class="highlighter-rouge">html</code>网页更富表现力。</em></p>
+
+<hr />
+
+<p><strong><code class="highlighter-rouge">css</code>的引入方式</strong></p>
+
+<p><code class="highlighter-rouge">css</code>可以控制<code class="highlighter-rouge">html</code>文档的显示，但是控制文档显示之前，首先应在需要显示的<code class="highlighter-rouge">html</code>文档中引入<code class="highlighter-rouge">css</code>样式表，<code class="highlighter-rouge">html</code>提供了以下四种引入方式：</p>
+
+<p>（1）内联样式：将样式内联定义到具体的<code class="highlighter-rouge">html</code>元素上，利用元素的<code class="highlighter-rouge">style</code>属性实现，通用用于精确控制一个<code class="highlighter-rouge">html</code>元素的表现。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- 内联样式：将css代码写在html具体的元素的style属性内 --&gt;
+&lt;p id="p1" style="color: red; font-size: 16px"&gt;内联样式&lt;/p&gt;
+</code></pre></div></div>
+
+<p>（2）内部样式：通常在<code class="highlighter-rouge">html</code>文档头部定义样式单部分来实现，这种方式下每批<code class="highlighter-rouge">css</code>样式只控制一份<code class="highlighter-rouge">html</code>文档。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- 内部样式：将css代码写在&lt;head&gt;里的&lt;style&gt;标签内实现 --&gt;
+&lt;style type="text/css"&gt;
+	#p2{
+		color: blue;
+		font-size: 20px;
+	}
+&lt;/style&gt;
+</code></pre></div></div>
+
+<p>（3）外链样式：样式文件和<code class="highlighter-rouge">html</code>文档分离，样式文件需要额外引入，这种方式下每批<code class="highlighter-rouge">css</code>样式能控制多份<code class="highlighter-rouge">html</code>文档（最常用）。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- 外链样式：利用link标签引入，使用频率最高 --&gt;
+&lt;link rel="stylesheet" type="text/css" href="outer.css" /&gt;
+</code></pre></div></div>
+
+<p>（4）导入外部样式：和第三种方式类似，只是使用<code class="highlighter-rouge">@import</code>来引入外部样式表文件。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- 导入外部样式：与link方法类似，语法不通，在&lt;style&gt;标签内使用 --&gt;
+&lt;style type="text/css"&gt;
+	@import "outer.css'";
+	@import url("outer.css");
+&lt;/style&gt;
+</code></pre></div></div>
+
+<p>优先级：内联样式<code class="highlighter-rouge">style</code>&gt; 内部样式 &gt; 导入外部样式<code class="highlighter-rouge">import</code> &gt; 外链样式<code class="highlighter-rouge">link</code></p>
+
+<hr />
+
+<p><strong><code class="highlighter-rouge">css</code>常用选择器介绍</strong></p>
+
+<p>定义<code class="highlighter-rouge">css</code>样式的语法总遵循如下格式：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Selector{
+	property1: value1;
+	property2: value2;
+}
+
+Selector：选择器，决定该样式的定义对哪些元素起作用
+{property:value...}：属性定义，决定这些样式起怎样的作用（字体、颜色、布局等）
+</code></pre></div></div>
+
+<p><strong>标签选择器</strong>：声明哪种标签会使用该<code class="highlighter-rouge">css</code>样式</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* E{....}，其中E代表有效的html元素 */
+a{
+	background-color: blue;
+	color: red;
+}
+</code></pre></div></div>
+
+<p><strong><code class="highlighter-rouge">class</code>选择器</strong>：声明特定<code class="highlighter-rouge">class</code>值的标签会使用该<code class="highlighter-rouge">css</code>样式（一个标签可以设置多个<code class="highlighter-rouge">class</code>值）</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* [E].classValue{....}，其中E表示html元素，当E存在时，指定的范围是标签为E且属性class的值为classValue，不存在时，范围是标签属性class的值为classValue */
+.p2{
+	background-color: yellow;
+	color: gray;
+}
+</code></pre></div></div>
+
+<p><strong><code class="highlighter-rouge">id</code>选择器</strong>：声明特定id值的标签会使用该<code class="highlighter-rouge">css</code>样式（一个标签只能设置一个<code class="highlighter-rouge">id</code>值）</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* [E]#idValue{....}，同class选择器概念，E可存在或不存在 */
+#id1{
+	background-color: gray;
+	color: white;
+}
+</code></pre></div></div>
+
+<p><strong>组合选择器</strong>：将具有相同<code class="highlighter-rouge">css</code>样式的选择器，一次性声明（不限于标签选择器，<code class="highlighter-rouge">class</code>选择器和<code class="highlighter-rouge">id</code>选择器也可以组合）</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* Selector1, Selector2, Selector3{....}，Selector都是有效的选择器，可以是标签选择器、class选择器、id选择器等 */
+span, b, #id1{
+	color: red;
+}
+</code></pre></div></div>
+
+<p><strong>嵌套选择器</strong>：也叫关联选择器（不只是标签选择器能嵌套，<code class="highlighter-rouge">class</code>选择器和<code class="highlighter-rouge">id</code>选择器也可以）</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* Selector1 Selector2{....}，Selector都是有效的选择器，表示当前需要设定样式的范围是Selector1选择器下所有的Selector2选择器*/
+div p{
+	background-color: green;
+	color: white;
+}
+</code></pre></div></div>
+
+<hr />
+
+<p><strong>常用的<code class="highlighter-rouge">css</code>属性介绍</strong></p>
+
+<p><strong>字体</strong>
+<code class="highlighter-rouge">font-family</code>：规定文本的字体系列，如<code class="highlighter-rouge">"serif"</code>、<code class="highlighter-rouge">"sans-serif"</code>等
+<code class="highlighter-rouge">font-size</code>：规定文本的字体尺寸
+<code class="highlighter-rouge">font-style</code>：规定文本的字体样式，主要有<code class="highlighter-rouge">normal</code>,<code class="highlighter-rouge">italic</code>,<code class="highlighter-rouge">oblique</code>
+<code class="highlighter-rouge">font-weight</code>：规定字体的粗细，主要有<code class="highlighter-rouge">normal</code>,<code class="highlighter-rouge">bold</code>,自定义粗细</p>
+
+<p><strong>文本</strong>
+<code class="highlighter-rouge">color</code>：设置文本颜色
+<code class="highlighter-rouge">letter-spacing</code>：设置字符间距（每个字母间的间距）
+<code class="highlighter-rouge">line-height</code>：设置文本行高
+<code class="highlighter-rouge">text-align</code>：设置文本的对齐方式，只有<code class="highlighter-rouge">left</code>, <code class="highlighter-rouge">right</code>, <code class="highlighter-rouge">center</code>
+<code class="highlighter-rouge">text-decoration</code>：设置文本的装饰效果，主要有<code class="highlighter-rouge">overline</code>（上划线）, <code class="highlighter-rouge">underline</code>（下划线）, 		<code class="highlighter-rouge">line-through</code>（删除线）
+<code class="highlighter-rouge">text-indent</code>：设置文本看首行缩进
+<code class="highlighter-rouge">text-transform</code>：设置文本的大小写，主要有<code class="highlighter-rouge">uppercase</code>, <code class="highlighter-rouge">lowercase</code>, <code class="highlighter-rouge">capitalize</code>
+<code class="highlighter-rouge">word-spacing</code>：设置单词间距</p>
+
+<p><strong>边框</strong>
+<code class="highlighter-rouge">border</code>：在一个声明中设置所有的边框属性
+<code class="highlighter-rouge">border-color</code>：设置四条边框的颜色
+<code class="highlighter-rouge">border-style</code>：设置四条边框的样式，只要有<code class="highlighter-rouge">dotted</code>, <code class="highlighter-rouge">solid</code>, <code class="highlighter-rouge">double</code>, <code class="highlighter-rouge">dashed</code>等值
+<code class="highlighter-rouge">border-width</code>：设置四条边框的宽度
+边框分为：<code class="highlighter-rouge">border-left</code>、<code class="highlighter-rouge">border-right</code>、<code class="highlighter-rouge">border-top</code>、<code class="highlighter-rouge">border-bottom</code>
+<code class="highlighter-rouge">border-left</code>：在一个声明中设置所有左边框属性，对应还有<code class="highlighter-rouge">border-right</code>等
+<code class="highlighter-rouge">border-left-color</code>：设置左边框颜色
+<code class="highlighter-rouge">border-lelft-style</code>：设置左边框样式
+<code class="highlighter-rouge">border-left-width</code>：设置左边框宽度</p>
+
+<p>可以将属性一次性写在一起，更方便
+<code class="highlighter-rouge">border: 10px red solid;</code></p>
+
+<p><strong>背景</strong>
+<code class="highlighter-rouge">background</code>：在一个声明中设置所有的背景属性
+<code class="highlighter-rouge">background-attachment</code>：设置背景图像是否固定或者随着页面的其余部分滚动，主要有<code class="highlighter-rouge">fixed</code>和<code class="highlighter-rouge">scroll</code>两个值
+<code class="highlighter-rouge">background-color</code>：设置元素的背景颜色
+<code class="highlighter-rouge">background-image</code>：设置元素的背景图片，主要有<code class="highlighter-rouge">url</code>和<code class="highlighter-rouge">none</code>两个属性
+<code class="highlighter-rouge">background-position</code>：<code class="highlighter-rouge">px</code>, <code class="highlighter-rouge">%</code> 设置背景图像的开始位置，可以指定<code class="highlighter-rouge">top</code> <code class="highlighter-rouge">left</code>等，也可以指定具体的像素位置
+<code class="highlighter-rouge">background-repeat</code>：设置是否及如何重复背景图像，主要有<code class="highlighter-rouge">repeat</code>, <code class="highlighter-rouge">repeat-x</code>, <code class="highlighter-rouge">repeat-y</code>, <code class="highlighter-rouge">no-repeat</code></p>
+
+<p><strong>列表</strong>
+<code class="highlighter-rouge">list-style</code>：在一个声明中设置所有的列表属性，设置成<code class="highlighter-rouge">none</code>可以去掉<code class="highlighter-rouge">ul</code>中的原点等属性值
+<code class="highlighter-rouge">list-style-image</code>：将图像设置为列表项标记，主要有<code class="highlighter-rouge">url</code>值
+<code class="highlighter-rouge">list-style-position</code>：设置列表项标记的放置位置，主要有<code class="highlighter-rouge">outside</code>和<code class="highlighter-rouge">inside</code>两个值
+<code class="highlighter-rouge">list-style-type</code>：设置列表项标记的类型，主要有<code class="highlighter-rouge">disc</code>, <code class="highlighter-rouge">circle</code>, <code class="highlighter-rouge">square</code>, <code class="highlighter-rouge">decimal</code>等，不能和<code class="highlighter-rouge">list-style-image</code>同时使用</p>
+
+<p><strong>表格</strong>
+<code class="highlighter-rouge">border-collapse</code>：设置是否把表格边框合并为单一的边框，值为<code class="highlighter-rouge">collapse</code>
+<code class="highlighter-rouge">border-spacing</code>：设置分割单元格边框的距离，与<code class="highlighter-rouge">border-collapse</code>不能同时使用
+<code class="highlighter-rouge">caption-side</code>：设置表格标题的位置
+<code class="highlighter-rouge">empty-cells</code>：设置是否显示表格中的空单元格，值为<code class="highlighter-rouge">hide</code>, <code class="highlighter-rouge">show</code></p>
+
+<p><strong>常用伪类别属性</strong>
+<code class="highlighter-rouge">&lt;a&gt;</code>超链接标签
+	<code class="highlighter-rouge">a:link</code> 超链接的普通样式
+	<code class="highlighter-rouge">a:visited</code> 被点击过的超链接样式
+	<code class="highlighter-rouge">a:hover</code> 鼠标指针经过超链接上时的样式
+	<code class="highlighter-rouge">a:active</code> 在超链接上单击时，既”当前激活”时超链接的样式</p>
+
+<p>块级标签-&gt;行级标签：<code class="highlighter-rouge">display:inline</code>
+行级标签-&gt;块级标签：<code class="highlighter-rouge">display:block</code>
+注：行级标签是默认情况下是不能设置宽度和高度的，如果要设置，需要把行级标签变成块级标签</p>
+
+<hr />
+
+<p><strong>盒子模型</strong></p>
+
+<p><em>我们可以把页面中的元素都可以看作一个盒子，占据着一定的页面空间，这些占据的空间往往比单纯的内容要大，换句话说，我们可以调整盒子的边框和距离的参数来调整盒子的位置。</em></p>
+
+<p>盒子宽度：<code class="highlighter-rouge">content</code>+<code class="highlighter-rouge">padding</code>+<code class="highlighter-rouge">border</code>+<code class="highlighter-rouge">margin</code></p>
+
+<p>因此我们可以利用好盒子的这些属性，就能很好的实现各种各样的排版效果。</p>
+
+<p><code class="highlighter-rouge">border</code>属性主要有3个，<code class="highlighter-rouge">border-color</code>, <code class="highlighter-rouge">border-width</code>, <code class="highlighter-rouge">border-style</code>，通常在设置<code class="highlighter-rouge">border</code>时常常将3个属性进行很好的配合，才能达到良好的效果。</p>
+
+<p><code class="highlighter-rouge">padding</code>用于控制<code class="highlighter-rouge">content</code>与<code class="highlighter-rouge">border</code>之间的距离。
+<code class="highlighter-rouge">padding</code>：一次性将四个边距全部设置（上右下左，顺时针）
+<code class="highlighter-rouge">padding-top</code>：上边距
+<code class="highlighter-rouge">padding-bottom</code>：下边距
+<code class="highlighter-rouge">padding-left</code>：左边距
+<code class="highlighter-rouge">padding-right</code>：右边距</p>
+
+<p><code class="highlighter-rouge">margin</code>指的是元素与元素之间的距离。
+<code class="highlighter-rouge">margin</code>：一次性将四个边距全部设置（上右下左，顺时针）
+<code class="highlighter-rouge">margin-top</code>：上边距
+<code class="highlighter-rouge">margin-bottom</code>：下边距
+<code class="highlighter-rouge">margin-left</code>：左边距
+<code class="highlighter-rouge">margin-right</code>：右边距</p>
+
+<p>注：</p>
+
+<ul>
+  <li>两个行级元素之间的距离是margin-left和margin-right两者的和，两个块级元素之间的距离不是margin-top和margin-bottom的和，而是两者之中的较大值。</li>
+  <li>其实margin除了设置正数以外，也可以设置负数，当设置为负数时，会使得块向反方向移动，甚至覆盖在另外的块上。</li>
+  <li>当块之间是父子关系，通过设置子块的margin为负数时，可以使得子块从父块中”分离出来”</li>
+</ul>
+
+<hr />
+
+<p><strong>元素的定位</strong></p>
+
+<p>网页中各个元素都必须有自己的位置，从而搭建出整个页面的结构。
+    <code class="highlighter-rouge">float</code>：值为<code class="highlighter-rouge">left</code>, <code class="highlighter-rouge">right</code>或者默认值<code class="highlighter-rouge">none</code>，当设置了元素向左浮动或向右浮动时，元素会向其父元素的左侧或右侧靠近
+    <code class="highlighter-rouge">clear</code>：设置块元素的<code class="highlighter-rouge">clear</code>属性清除对<code class="highlighter-rouge">float</code>的影响，值为<code class="highlighter-rouge">left</code>, <code class="highlighter-rouge">right</code>, <code class="highlighter-rouge">both</code>
+    <code class="highlighter-rouge">position</code>：制定块的位置，即块相对于其父块的位置和相对它自身应该在位置，值有<code class="highlighter-rouge">absolute</code>, <code class="highlighter-rouge">fixed</code>, <code class="highlighter-rouge">relative</code>, <code class="highlighter-rouge">static</code>
+    当将子块的<code class="highlighter-rouge">position</code>设置为<code class="highlighter-rouge">absolute</code>时，子块已经不再从属于父块，其边框设置的距离是相对页面<code class="highlighter-rouge">body</code>的距离，而不是父块的距离
+    当将块的<code class="highlighter-rouge">position</code>参数设置为<code class="highlighter-rouge">relative</code>时，与将其设置为<code class="highlighter-rouge">absolute</code>时完全不同，这时子块时相对于自身在父块的原先位置来进行定位的。</p>
+
+<p>定位资料参考：http://www.cnblogs.com/dolphinX/archive/2012/10/13/2722501.html</p>
+
+:ET

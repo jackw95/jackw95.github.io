@@ -1,0 +1,230 @@
+---
+layout: post
+title:  "数组函数"
+date:   2018-05-28
+categories: PHP基础
+tags: php
+excerpt: PHP基础
+---
+
+* content
+{:toc}
+
+#### 数组
+
+**php中的数组是一个有序映射，映射是一种把values关联到keys的类型，数组可以接受任意数量用逗号分隔符的键值对。**
+
+**数组的介绍**
+
+    /*
+     * php中数组可以分为：
+     * 索引数组：下标是数字
+     * 关联数组：下标是字符串
+     * 注：php中数组其实不区分索引还是关联数组，都是根据键名找到对应的值
+     *
+     * php可以同时包含integer和string类型的键名
+     * key：可以是一个整数integer或者字符串string
+     * value：可以是任意类型的值
+     *
+     * php中的key只能是integer或这string类型，如果使用其他类型会自动转换：
+     * 1. 包含有合法整型值的字符串会被自动转换成整型（如'8'会被转换为8，但是'08'不会被转换）
+     * 2. 浮点数会被转换成整型，小数部分会被舍去
+     * 3. 布尔值会被转换成整型（true转成1，false转成0）
+     * 4. NULL会被转换成空字符串，即''
+     * 5. 数组和对象不能被用为键名
+     *
+     * 如果数组定义中多个单元都用了同一个键名，则只会使用最后一个，之前的值都会被覆盖
+     * 如果没有指定键名，且键名不都为负数，新添加的元素的键名是已有键名的最大值+1
+     * 如果键名都为负数，那么新添加的元素键名从0开始
+     *
+     */
+
+**数组的创建**
+
+    $arr1 = array();  //创建一个空数组
+    $arr2 = array(1, 2, 3);  //创建一个索引数组
+    $arr3 = array(  //创建一个关联数组
+        'a' => 'a_value',
+        'b' => 'b_value',
+        'c' => 'c_value'
+    );
+    $arr4 = [];  //[]用法和array()一致，同样可以创建空数组、索引数组、关联数组
+    $arr4[] = 'a';  //利用[]对数组进行扩展，为数组新添元素
+
+**键名类型的自动转换**
+
+    $arr = array(
+        1 => 'a',           //1     键名为integer类型，不会自动转换
+        'b' => 'b',         //'b'   键名为string类型，不会自动转换
+        '8' => 'c',         //8     包含有合法整型值的字符串会自动转换成整型
+        3.5 => 'd',         //3     键名为浮点数类型，会舍去小数，转换成integer类型
+        true => 'e',        //1     键名为布尔类型，true转成1，false转成0
+        null => 'f',        //''    键名为NULL类型，会转成''
+        'g'                 //9     没有指定键名，默认为已有最大健名的值+1
+    );
+    $arr[] = 'h';           //10    新添加一个健值对，没有指定键名，默认为已有最大健名的值+1
+    print_r($arr);  //printf_r()是数组输出专用函数
+
+**通过range()和compact()快速创建**
+
+    //range()快速创建下标连续的索引数组
+    //
+    /*
+     * range()函数
+     * array range(mixed $start, mixed $limit[, number $step=1])
+     * 描述：建立一个包含指定范围单元的，且下标连续的索引数组
+     * start：序列的第一个值
+     * limit：序列结束于limit的值
+     * step：如果给出了step的值，它将被作为单元之间的步进值，如果未指定，默认为1
+     *
+     * 补充：
+     * string chr(int $value)：将数字作为ASCII转成成字符
+     * int ord(string $value)：输出字符的ASCII
+     */
+    $arr = range(1, 5);
+    print_r($arr);  //Array([0] => 1 [1] => 2 [2] => 3 [3] => 4 [4] => 5)
+    
+    $arr = range('a', 'b', 'c');
+    print_r($arr);  //Array([0] => a [1] => b [2] => c)
+    
+    echo chr(90), "\n";  //Z
+    echo ord('z'), "\n";  //122
+    
+    //compact()快速创建关联数组
+    /*
+     * compact()函数
+     * array compact(mixed $varname[, mixed $...])
+     * 描述：建立一个数组，包括变量名和它们的值
+     *
+     * 补充：
+     * list($var1, $var2...)：将数组中的值赋给一些变量
+     */
+    $username = 'zhao';
+    $age = '22';
+    $email = 'wangzhao_hb@126.com';
+    
+    $arr = compact('username', 'age', 'email');  //通过将已有变量名放在函数中快速生成关联数组
+    //Array([username] => zhao [age] => 22 [email] => wangzhao_hb@126.com)
+    print_r($arr);
+    
+    list($a, $b, $c) = array(1, 2, 3);
+    echo "a的值为{$a}, b的值为{$b}, c的值为{$c}", "\n";  //a的值为1, b的值为2, c的值为3
+    
+
+**通过const和define()定义常量数组**
+
+    const ARR1 = [1, 2, 3];  //const定义常量数组
+    print_r(ARR1);  //Array([0] => 1 [1] => 2 [2] => 3)
+    
+    define('ARR2', [1, 2, 3]);  //define()定义常量数组
+    print_r(ARR2);  //Array([0] => 1 [1] => 2 [2] => 3)
+    
+    //运用场景：自定义文件上传错误数组信息
+    define('CUSTOM_UPLOAD_ERRORS', [
+        'ext_error' => '文件扩展名不符合规范',
+        'maxsize' => '上传文件大小不符合规范'
+    ]);
+    
+    //遇到文件上传时扩展名不符合规范的时候，可调用报错
+    echo CUSTOM_UPLOAD_ERRORS['ext_error'], "\n";  //文件扩展名不符合规范
+
+**数组的使用**
+
+    /*
+     * => 通过键名找到对应的键值
+     * 增、删、改、查
+     */
+    
+    //查找：通过键名找到对应的键值
+    $arr1 = ['a', 'b', 'c', 'd'];
+    $arr2 = [
+        'username' => '王昭',
+        'sex' => '男'
+    ];
+    echo '下标为2的值：', $arr1[2], "\n";  //下标为2的值：c
+    echo '用户名为：',$arr2['username'], "\n";  //用户名为：王昭
+    
+    $arr3 = [  //二位数组的查找
+        ['id'=>'1001', 'name'=>'张三'],
+        ['id'=>'1002', 'name'=>'李四']
+    ];
+    echo '下标为0的姓名：', $arr3[0]['name'], "\n";  //下标为0的姓名：张三
+    
+    //添加
+    $arr = ['a', 'b', 'c'];
+    $arr[] = 'd';  //添加元素，不指定键名，键名为数字
+    $arr['username'] = '王昭';  //添加元素，指定键名，键名为字符串
+    print_r($arr);  //Array([0] => a [1] => b [2] => c [3] => d [username] => 王昭)
+    
+    //修改
+    $arr = ['a', 'b', 'c', 'username'=>'王昭'];
+    $arr['username'] = '张三';
+    echo $arr['username'], "\n";  //张三
+    
+    //删除
+    unset($arr['username']);  //删除键名为'username'的键值对
+    print_r($arr);  //Array([0] => a [1] => b [2] => c)
+    
+    unset($arr[1]);
+    print_r($arr);  //Array([0] => a [2] => c)
+    
+    
+    unset($arr);  //释放数组
+    //print_r($arr);  //输出错误 Notice: Undefined variable
+    
+
+**其他类型转换成数组**
+
+    /*
+     * 如果将一个值转换为数组，将得到一个仅有一个元素的数组，其下标为0，该元素即为此标量的值；
+     * 对象可以转换为数组，但是注意尽量避免这样转换，因为会导致一些意想不到的效果。
+     * 注意：null转换成数组是空数组[]
+     *
+     * 临时转换
+     * (array)$var
+     *
+     * 永久转换
+     * settype($var, 'array')
+     */
+    $str = 'abc';
+    $arr = (array)$str;
+    print_r($arr);  //Array([0] => abc)
+    
+    settype($str, 'array');
+    print_r($str);  //Array([0] => abc)
+
+**数组运算符**
+
+    /*
+     * 常用的数组运算符：
+     * +：合并数组，如果键名相同，只展示左边数组的键值对
+     * ==：比较数组的键名和对应的键值是否相同，如果相同返回true，否则返回false
+     * ===：既要比较键名和对应的键值及键值类型是否相同，而且顺序也要相同
+     * !=：比较数组的键名和对应的键值是否不相同
+     * !==：比较数组的键名和对应的键值和键值类型是否不相同，或者顺序不相同
+     * <>：和!=效果一样
+     *
+     *
+     */
+    $arr1 = [1, 2, 3];
+    $arr2 = ['a', 'b', 'c'];
+    $arr3 = ['username'=>'张三', 'age'=>12];
+    $arr4 = [10=>10, 11=>11];
+    $arrSum1 = $arr1 + $arr2;  //如果键名相同，只会展示左边数组的键值对
+    $arrSum2 = $arr1 + $arr3;  //+与数组是索引数组或者是关联数组无关
+    $arrSum3 = $arr1 + $arr3 + $arr4;  //如果后面的数组的键名和前面的数组的键名重复，不会覆盖，会展示前面数组对应的键值
+    print_r($arrSum1);  //Array([0] => 1 [1] => 2 [2] => 3)
+    print_r($arrSum2);  //Array([0] => 1 [1] => 2 [2] => 3 [username] => 张三 [age] => 12)
+    print_r($arrSum3);  //Array([0] => 1 [1] => 2 [2] => 3 [username] => 张三 [age] => 12 [10] => 10 [11] => 11)
+    
+    $arr5 = ['1'=>1, 'b'=>2, 'c'=>3];
+    $arr6 = ['b'=>2, '1'=>1, 'c'=>3];
+    $arr7 = [1=>1, 'b'=>2, 'c'=>3];
+    var_dump($arr5 == $arr6);  //bool(true)
+    var_dump($arr5 === $arr6);  //bool(false)
+    var_dump($arr5 === $arr7);  //bool(true)
+    
+    var_dump($arr5 != $arr6);  //bool(false)
+    var_dump($arr5 !== $arr6);  //bool(true)
+
+
