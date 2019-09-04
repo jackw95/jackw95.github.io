@@ -2,8 +2,8 @@
 layout: post
 title:  "PHP - 数学函数"
 date:   2018-06-01
-categories: PHP
-excerpt: PHP语法
+categories: PHP基础篇
+excerpt: PHP基础
 ---
 
 * content

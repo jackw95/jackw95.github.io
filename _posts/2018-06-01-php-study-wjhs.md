@@ -2,8 +2,8 @@
 layout: post
 title:  "PHP - 文件函数库"
 date:   2018-06-01
-categories: PHP语法
-excerpt: PHP语法
+categories: PHP基础篇
+excerpt: PHP基础
 ---
 
 * content
