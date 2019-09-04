@@ -1,0 +1,195 @@
+I"�#
+<p>####<code class="highlighter-rouge">PHP</code>简介
+最初用于维护个人主页，简写为：<code class="highlighter-rouge">Personal HomePage</code>。
+最后改为：<code class="highlighter-rouge">Hypertext Preprocessor</code>（超文本预处理器），于1994年诞生。</p>
+
+<p><strong>优势</strong></p>
+
+<ol>
+  <li>性能好，开发效率高</li>
+  <li>跨平台（可以在不同的操作系统上运：<code class="highlighter-rouge">windows</code>/<code class="highlighter-rouge">linux</code>/<code class="highlighter-rouge">unix</code>）</li>
+  <li>上手快，编辑简单，实用性强</li>
+  <li>面向对象[<code class="highlighter-rouge">PHP 4</code>开始，目前完全支持面向对象]</li>
+  <li>开放的源代码，所有的<code class="highlighter-rouge">PHP</code>源代码都可以得到</li>
+  <li>成本低</li>
+</ol>
+
+<p>注：<code class="highlighter-rouge">PHP</code>灵活，对程序员的约束太少，<code class="highlighter-rouge">PHP</code>默认是解释运行机制，所以很多问题在运行阶段才会发现。</p>
+
+<p><strong><code class="highlighter-rouge">B/S</code>结构和<code class="highlighter-rouge">C/S</code>结构</strong></p>
+
+<ul>
+  <li><code class="highlighter-rouge">B/S</code>：<code class="highlighter-rouge">Browser-Server</code>，浏览器-服务器，通过浏览器访问，都可以看作<code class="highlighter-rouge">B/S</code></li>
+  <li><code class="highlighter-rouge">C/S</code>：<code class="highlighter-rouge">Client-Server</code>，客户端-服务器，通过客户端访问，比如<code class="highlighter-rouge">QQ</code>，微信</li>
+</ul>
+
+<p>####<code class="highlighter-rouge">PHP</code>基础语法</p>
+
+<p><strong>开始标记和结束标记</strong></p>
+
+<ul>
+  <li>告诉<code class="highlighter-rouge">PHP</code>开始和停止解析二者之间的代码，这使得<code class="highlighter-rouge">PHP</code>可以被嵌入到各种不同的文档中去。</li>
+  <li>如果是文件是纯<code class="highlighter-rouge">PHP</code>代码，最好在文件末尾删除<code class="highlighter-rouge">PHP</code>结束标记。</li>
+</ul>
+
+<p><strong>指令分隔符</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//指令分隔符：php和其他编程语言一样，在每个语句后用分号';'结束指令，一段PHP代码中的结束标记隐含一个分号，所以在一个PHP代码段中的最后一行可以不用分号结束。
+ echo 'hello, world'."\n";
+</code></pre></div></div>
+
+<p><strong>注释</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//单行注释：// #
+//多行注释： /* */
+
+echo "你好"."\n";  //单行注释
+echo "你也好"."\n";  #单行注释
+
+/*
+ * 多行注释
+ */
+echo "大家都好"."\n"; 
+</code></pre></div></div>
+
+<p>####变量</p>
+
+<p>由一个美元符号<code class="highlighter-rouge">$</code>后面跟变量名来表示（变量名区分大小写）。
+和其他编程语言一样，一个有效的变量名由字符或者下划线开头，后面跟上任意数量的字符、数字或者下划线（也可中文）。</p>
+
+<p><code class="highlighter-rouge">$this</code>是个特殊的变量，不能被赋值。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//使用变量之前必须定义并进行赋值
+$a;  //定义后不赋值直接使用会报错：Undefined variable
+echo $a;
+
+//变量名区分大小写
+$var = "Bob";
+$Var = "Tom";
+echo $var."和".$Var."\n";
+</code></pre></div></div>
+
+<p><strong>传值赋值和引用赋值</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+ * 传值赋值：当一个变量的值赋予另外一个变量的时候，改变其中一个变量的值，将不会影响到另外一个变量。
+ * 引用赋值：新变量指向了原始变量，改动新的变量将影响到原始变量，反之亦然。（只有由名字的变量才能引用赋值，比如表达式就不可以）
+ */
+$a = "Bob";
+$b = $a;  //传值赋值
+$b = 10;
+echo "a：".$a."\tb：".$b."\n";
+
+$c = &amp;$a;  //引用赋值
+$c = 20;
+echo "a：".$a."\tc：".$c."\n";
+</code></pre></div></div>
+
+<p><strong>全局变量</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+ * php
+ * 在C语言中全局变量在函数中会自动生效，除非被局部变量覆盖。
+ * php中全局变量在函数中使用时必须声明为global
+ * $GLOBALS是一个关联数组，每一个变量为一个元素，键名对应对变量，值对应变量内容。
+ */
+$a = 1;
+$b = 2;
+function Sum()
+{
+    echo "a：".$a."\tb：".$b;  //不会有任何输出
+
+    //方法一：使用global标识全局变量
+    global $a, $b;
+    echo "a + b = ".($a + $b)."\n";
+
+    //方法二：使用$GLOBALS替代
+    echo "a + b = ".($GLOBALS['a'] + $GLOBALS['b'])."\n";
+}
+Sum();
+</code></pre></div></div>
+
+<p><strong>静态变量</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+ * 静态变量仅在局部函数域中存在，但当程序执行离开此作用域时，其值并不丢失。
+ */
+//每次调用，$a都会重新定义赋初值，$b在编译期间初始化，以后不会重新定义。
+function Test1()
+{
+    $a = 0;
+    static $b = 0;
+    static $c = 1+2;
+
+    echo "a=".$a."\t"."b=".$b."\n";
+    $a++;
+    $b++;
+}
+
+for ($i = 0; $i &lt; 10; $i ++)
+{
+    Test1();
+}
+</code></pre></div></div>
+
+<p><strong>可变变量</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+ * 可变变量：一个变量的变量名可以动态设置和使用。
+ */
+
+$a = 'hello';
+$$a = "world";  //一个可变变量获取了一个普通变量的值作为这个可变变量的变量名
+
+echo "$a ${$a}"."\n";
+echo "$a $hello"."\n";
+</code></pre></div></div>
+
+<p>####常量
+一旦被定义，就不能再改变或者取消定义
+常量只能包含<code class="highlighter-rouge">boolean</code>，<code class="highlighter-rouge">integer</code>，<code class="highlighter-rouge">float</code>，<code class="highlighter-rouge">string</code></p>
+
+<p>常量和变量有如下不同：</p>
+
+<ul>
+  <li>常量前面没有美元符号<code class="highlighter-rouge">$</code>;</li>
+  <li>常量只能用<code class="highlighter-rouge">define()</code>函数定义，而不能通过赋值语句;</li>
+  <li>常量可以不用理会变量的作用域而在任何地方定义和访问;</li>
+  <li>常量一旦定义就不能被重新定义或者取消定义;</li>
+  <li>常量的值只能是标量类型;</li>
+</ul>
+
+<p><strong>常量的定义</strong>
+<code class="highlighter-rouge">php5.3.0</code>后，除了使用函数<code class="highlighter-rouge">define()</code>之外，还可以使用关键字<code class="highlighter-rouge">const</code>来定义常量。</p>
+
+<p><code class="highlighter-rouge">const</code>和<code class="highlighter-rouge">define()</code>的区别：</p>
+
+<ul>
+  <li>版本差异，<code class="highlighter-rouge">php5.3.0</code>后才能使用<code class="highlighter-rouge">const</code>关键字，<code class="highlighter-rouge">define()</code>函数对所有版本兼容</li>
+  <li>定义位置差异：
+	<code class="highlighter-rouge">define()</code>函数定义的常量是在执行<code class="highlighter-rouge">define()</code>函数时定义的，可以在任何位置定义，无论是函数内或函数外
+    <code class="highlighter-rouge">const</code>关键字定义的常量是编译时定义的，所以定义的时候必须处于最顶端的作用区域，不能在函数内部</li>
+  <li>对值的表达式支持差异
+      <code class="highlighter-rouge">const</code>关键字定义的常量值的表达式中不支持运算符，<code class="highlighter-rouge">define()</code>函数可以支持</li>
+</ul>
+
+<p>注意：使用<code class="highlighter-rouge">const</code>关键字定义常量必须处于最顶端的作用区域。因为用此方法是在编译时定义的，这就意味着不能在函数内，循环体内用<code class="highlighter-rouge">const</code>来定义常量。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>define("A", "Hello, world");
+echo "A = ".A."\n";
+    
+const B = "你好";
+echo "B = ".B."\n";
+</code></pre></div></div>
+
+<p><strong>魔术常量</strong></p>
+
+<p><code class="highlighter-rouge">__LINE__</code>：文件中的当前行号
+<code class="highlighter-rouge">__FILE__</code>：文件的完整路径和文件名
+<code class="highlighter-rouge">__DIR__</code>：文件所在的目录
+<code class="highlighter-rouge">__FUNCTION__</code>：函数名称
+<code class="highlighter-rouge">__CLASS__</code>：类的名称
+<code class="highlighter-rouge">__TRAIT__</code>：<code class="highlighter-rouge">Trait</code>的名字，包括其被声明的作用区域
+<code class="highlighter-rouge">__METHOD__</code>：类的方法名
+<code class="highlighter-rouge">__NAMESPACE__</code>：当前命名空间的名称</p>
+:ET
