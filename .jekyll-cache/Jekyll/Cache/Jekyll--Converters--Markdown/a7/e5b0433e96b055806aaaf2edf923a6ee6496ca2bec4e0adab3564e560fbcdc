@@ -1,0 +1,15 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#dns" id="markdown-toc-dns"><code class="highlighter-rouge">DNS</code></a></li>
+</ul>
+
+<h4 id="dns"><code class="highlighter-rouge">DNS</code></h4>
+<p><code class="highlighter-rouge">Domain Name Server</code>，域名服务器</p>
+
+<p><em>实际上就是装有域名系统的主机。它是一种能够实现名字解析（<code class="highlighter-rouge">name resolution</code>）的分层结构数据库。</em></p>
+
+<p>作用：是进行域名(<code class="highlighter-rouge">domain name</code>)和与之相对应的<code class="highlighter-rouge">IP</code>地址 (<code class="highlighter-rouge">IP address</code>)转换的服务器。<code class="highlighter-rouge">DNS</code>中保存了一张域名(<code class="highlighter-rouge">domain name</code>)和与之相对应的<code class="highlighter-rouge">IP</code>地址 (<code class="highlighter-rouge">IP address</code>)的表，以解析消息的域名。</p>
+
+<p><strong>域名</strong>(<code class="highlighter-rouge">domain name</code>)：是<code class="highlighter-rouge">Internet</code>上某一台计算机或计算机组的名称，用于在数据传输时标识计算机的电子方位（有时也指地理位置）。</p>
+
+<p><strong><code class="highlighter-rouge">IP</code>地址</strong>：是<code class="highlighter-rouge">IP Address</code>的缩写。<code class="highlighter-rouge">IP</code>地址是<code class="highlighter-rouge">IP协议</code>提供的一种统一的地址格式，它为互联网上的每一个网络和每一台主机分配一个逻辑地址，以此来屏蔽物理地址的差异，<code class="highlighter-rouge">IP</code>地址被用来给<code class="highlighter-rouge">Internet</code>上的电脑一个编号。</p>
+:ET
