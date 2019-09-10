@@ -4,7 +4,7 @@ title:  "简介"
 date:   2017-05-12
 categories: PHP基础
 tags: php
-excerpt: 最初用于维护个人主页，简写为：`Personal HomePage`。
+excerpt: 
 ---
 
 * content

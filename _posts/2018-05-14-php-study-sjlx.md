@@ -4,7 +4,7 @@ title:  "数据类型"
 date:   2018-05-14
 categories: PHP基础
 tags: php
-excerpt: PHP支持八种原始的数据类型
+excerpt: 
 ---
 
 * content
