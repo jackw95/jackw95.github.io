@@ -4,7 +4,7 @@ title:  "函数"
 date:   2017-05-20
 categories: PHP基础
 tags: php
-excerpt: PHP基础
+excerpt: 实现特定功能的、可以重复执行的代码段
 ---
 
 * content

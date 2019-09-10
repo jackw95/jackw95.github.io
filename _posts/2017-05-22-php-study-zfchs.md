@@ -4,7 +4,7 @@ title:  "字符串函数"
 date:   2017-05-22
 categories: PHP基础
 tags: php
-excerpt: PHP基础
+excerpt: 字符串常用函数
 ---
 
 * content

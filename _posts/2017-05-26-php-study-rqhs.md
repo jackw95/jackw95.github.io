@@ -4,7 +4,7 @@ title:  "日期函数"
 date:   2017-05-26
 categories: PHP基础
 tags: php
-excerpt: PHP基础
+excerpt: 日期时间函数
 ---
 
 * content

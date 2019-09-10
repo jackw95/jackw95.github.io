@@ -4,7 +4,7 @@ title:  "HTML"
 date:   2018-06-02
 categories: Web前端
 tags: web
-excerpt: Web前端
+excerpt: 超文本标记语言
 ---
 
 * content

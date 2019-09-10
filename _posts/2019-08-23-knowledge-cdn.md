@@ -4,7 +4,7 @@ title:  "CDN"
 date:   2019-08-23
 categories: 知识点
 tags: web
-excerpt: 知识点
+excerpt: 内容分发网络
 ---
 
 * content

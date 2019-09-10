@@ -4,7 +4,7 @@ title:  "CSS"
 date:   2018-06-03
 categories: Web前端
 tags: web
-excerpt: Web前端
+excerpt: 层叠样式表
 ---
 
 * content

@@ -4,7 +4,7 @@ title:  "数组函数"
 date:   2017-05-28
 categories: PHP基础
 tags: php
-excerpt: PHP基础
+excerpt: php中的数组是一个有序映射，映射是一种把values关联到keys的类型，数组可以接受任意数量用逗号分隔符的键值对。
 ---
 
 * content

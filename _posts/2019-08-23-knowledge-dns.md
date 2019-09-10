@@ -4,7 +4,7 @@ title:  "DNS"
 date:   2019-08-23
 categories: 知识点
 tags: web
-excerpt: 知识点
+excerpt: 域名服务器
 ---
 
 * content

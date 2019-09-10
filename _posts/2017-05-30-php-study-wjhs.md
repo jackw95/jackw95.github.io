@@ -4,7 +4,7 @@ title:  "文件函数库"
 date:   2017-05-30
 categories: PHP基础
 tags: php
-excerpt: PHP基础
+excerpt: 文件、目录函数库为`PHP`核心函数库，可以通过其提供的`API`完成对于文件及目录的常用操作
 ---
 
 * content

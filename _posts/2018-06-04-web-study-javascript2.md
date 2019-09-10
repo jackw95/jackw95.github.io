@@ -4,7 +4,7 @@ title:  "Javascript下"
 date:   2018-06-04
 categories: Web前端
 tags: web
-excerpt: Web前端
+excerpt: 基于客户端浏览器、基于面向对象、事件驱动式的网页脚本语言
 ---
 
 * content

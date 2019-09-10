@@ -4,7 +4,7 @@ title:  "正则表达式"
 date:   2019-08-28
 categories: 知识点
 tags: web
-excerpt: 知识点
+excerpt: 按照某种规则去匹配符合条件的字符串
 ---
 
 * content

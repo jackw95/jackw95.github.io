@@ -4,7 +4,7 @@ title:  数学函数"
 date:   2017-05-24
 categories: PHP基础
 tags: php
-excerpt: PHP基础
+excerpt: 数学函数库
 ---
 
 * content
