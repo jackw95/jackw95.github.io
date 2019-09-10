@@ -3,7 +3,7 @@ layout: post
 title:  "SSH"
 date:   2019-08-23
 categories: 知识点
-tags: web
+tags: 知识点
 excerpt: 安全的外壳协议
 ---
 
