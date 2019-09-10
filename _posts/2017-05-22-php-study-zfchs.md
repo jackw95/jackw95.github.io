@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "字符串函数"
-date:   2018-05-22
+date:   2017-05-22
 categories: PHP基础
 tags: php
 excerpt: PHP基础

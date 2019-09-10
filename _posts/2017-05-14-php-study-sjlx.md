@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "数据类型"
-date:   2018-05-14
+date:   2017-05-14
 categories: PHP基础
 tags: php
 excerpt: 

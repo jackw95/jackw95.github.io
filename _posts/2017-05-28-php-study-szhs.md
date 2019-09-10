@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "数组函数"
-date:   2018-05-28
+date:   2017-05-28
 categories: PHP基础
 tags: php
 excerpt: PHP基础

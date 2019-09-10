@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "文件函数库"
-date:   2018-05-30
+date:   2017-05-30
 categories: PHP基础
 tags: php
 excerpt: PHP基础

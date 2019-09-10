@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "日期函数"
-date:   2018-05-26
+date:   2017-05-26
 categories: PHP基础
 tags: php
 excerpt: PHP基础
