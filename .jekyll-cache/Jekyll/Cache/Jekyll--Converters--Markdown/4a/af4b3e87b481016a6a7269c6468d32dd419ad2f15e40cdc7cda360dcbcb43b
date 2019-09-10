@@ -1,0 +1,29 @@
+I"!
+<table>
+  <tbody>
+    <tr>
+      <td>### 06</td>
+      <td>全局锁和表锁 ：给表加个字段怎么有这么多阻碍？</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>数据库锁的初衷：处理并发问题</p>
+<ul>
+  <li>全局锁</li>
+  <li>表锁</li>
+  <li>行锁</li>
+</ul>
+
+<p>全局锁：对整个数据库实例加锁。<code class="highlighter-rouge">MySQL</code>提供了一个加全局读锁的方法（FTWRL），<code class="highlighter-rouge">Flush tables with read lock</code>，之后整个数据库处于读锁状态。
+使用场景：全库逻辑备份，就是说把整库每个表都select出来存成文本。</p>
+
+<p>这个库变成只读状态后：</p>
+<ul>
+  <li>如果在主库上备份，备份期间都不能执行更新，业务基本上就得停摆</li>
+  <li>在从库上备份，备份期间从库不能执行主库同步过来的<code class="highlighter-rouge">binlog</code>，导致主从延迟。</li>
+</ul>
+
+<p>表级锁：对整个表进行加锁。加锁<code class="highlighter-rouge">lock tables xxx read/write</code>，释放锁<code class="highlighter-rouge">unlock tables xxx</code>，客户端断开的时候也会自动释放表锁。注意：lock tables语法除了会限制别的线程的读写外，也限制了本线程接下来的操作对象。
+在线程A中使用<code class="highlighter-rouge">lock tables t1 read, t2 write</code>后，其他线程写t1，读写t2都会被阻塞，同时，线程A在执行<code class="highlighter-rouge">unlock tables</code>之前，只能执行读t1，读写t2的操作。</p>
+:ET

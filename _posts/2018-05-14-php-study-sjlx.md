@@ -4,7 +4,7 @@ title:  "数据类型"
 date:   2018-05-14
 categories: PHP基础
 tags: php
-excerpt: PHP基础
+excerpt: PHP支持八种原始的数据类型
 ---
 
 * content
@@ -13,8 +13,18 @@ excerpt: PHP基础
 #### `PHP`数据类型
 `PHP`支持八种原始的**数据类型**：
 
-![clipboard.png](/img/bVbbDN4)
-
+- 标量类型
+    - `integer`（整型）
+    - `float\double`（浮点型）
+    - `bool`（布尔型）
+    - `string`（字符串型）
+- 复合类型
+    - `array`（数组）
+    - `object`（对象）
+- 特殊类型
+    - `recourse`（资源）
+    - `null`（空）  
+  
 
 **布尔型**
 

@@ -1,11 +1,32 @@
-I"j<ul id="markdown-toc">
+I"!<ul id="markdown-toc">
   <li><a href="#php数据类型" id="markdown-toc-php数据类型"><code class="highlighter-rouge">PHP</code>数据类型</a></li>
 </ul>
 
 <h4 id="php数据类型"><code class="highlighter-rouge">PHP</code>数据类型</h4>
 <p><code class="highlighter-rouge">PHP</code>支持八种原始的<strong>数据类型</strong>：</p>
 
-<p><img src="/img/bVbbDN4" alt="clipboard.png" /></p>
+<ul>
+  <li>标量类型
+    <ul>
+      <li><code class="highlighter-rouge">integer</code>（整型）</li>
+      <li><code class="highlighter-rouge">float\double</code>（浮点型）</li>
+      <li><code class="highlighter-rouge">bool</code>（布尔型）</li>
+      <li><code class="highlighter-rouge">string</code>（字符串型）</li>
+    </ul>
+  </li>
+  <li>复合类型
+    <ul>
+      <li><code class="highlighter-rouge">array</code>（数组）</li>
+      <li><code class="highlighter-rouge">object</code>（对象）</li>
+    </ul>
+  </li>
+  <li>特殊类型
+    <ul>
+      <li><code class="highlighter-rouge">recourse</code>（资源）</li>
+      <li><code class="highlighter-rouge">null</code>（空）</li>
+    </ul>
+  </li>
+</ul>
 
 <p><strong>布尔型</strong></p>
 

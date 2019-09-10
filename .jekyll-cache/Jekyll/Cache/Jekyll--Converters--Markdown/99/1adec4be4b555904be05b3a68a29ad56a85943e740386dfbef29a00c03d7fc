@@ -1,0 +1,43 @@
+I"<ul id="markdown-toc">
+  <li><a href="#01--基础架构一条sql查询语句是如何执行的" id="markdown-toc-01--基础架构一条sql查询语句是如何执行的">01 | 基础架构：一条<code class="highlighter-rouge">SQL</code>查询语句是如何执行的？</a></li>
+</ul>
+
+<h3 id="01--基础架构一条sql查询语句是如何执行的">01 | 基础架构：一条<code class="highlighter-rouge">SQL</code>查询语句是如何执行的？</h3>
+
+<p><code class="highlighter-rouge">MySQL</code>分为两部分：</p>
+<ul>
+  <li><code class="highlighter-rouge">Server</code>层<br />
+  包含连接器、查询缓存、分析器、优化器、执行器等，涵盖<code class="highlighter-rouge">MySQL</code>的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等。</li>
+  <li>存储引擎层<br />
+  负责数据的存储和提取。其架构模式是插件式的，支持<code class="highlighter-rouge">InnoDB</code>、<code class="highlighter-rouge">MyISAM</code>、<code class="highlighter-rouge">Memory</code>等多个存储引擎，<code class="highlighter-rouge">MySQL 5.5.5</code>版本开始<code class="highlighter-rouge">InnoDB</code>为默认的存储引擎。</li>
+</ul>
+
+<p><strong><code class="highlighter-rouge">Server</code>层</strong>：</p>
+<ul>
+  <li><strong>连接器</strong><br />
+负责跟客户端建立连接、获取权限、维持和管理连接
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  mysql -h$ip -P$port -u$user -p  //连接数据库
+</code></pre></div>    </div>
+    <p>输入密码后，如果用户名或密码不对，则会提示<code class="highlighter-rouge">Access denied for user</code>，如果认证通过，连接器会到权限表里面查出你拥有的权限。之后，这个连接里面的权限判断逻辑，都将依赖此时读到的权限。</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  show processlist  //显示所有连接
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>查询缓存</strong><br />
+命中则直接返回结果。<code class="highlighter-rouge">MySQL</code>拿到查询请求后，会先到查询缓存看看，之前是否执行过这条语句，之前执行过的语句及其结果可能会以<code class="highlighter-rouge">key-value</code>对的形式，被直接缓存在内存中，<code class="highlighter-rouge">key</code>为<code class="highlighter-rouge">sql</code>语句，有则返回。没有就会进行分析器以后的流程，执行完成后结果会被存入查询缓存。当表中有执行更新操作时，则该表对应的所有查询缓存失效。<code class="highlighter-rouge">MySQL 8.0</code>版本直接将查询缓存的整块功能删掉了。</p>
+  </li>
+  <li>
+    <p><strong>分析器</strong><br />
+词法分析，语法分析。如果没有命中查询缓存，就要开始执行语句，<code class="highlighter-rouge">MySQL</code>需要知道你要做什么，需要对<code class="highlighter-rouge">SQL</code>语句进行分析。<br />
+词法分析：<code class="highlighter-rouge">SQL</code>语句中各个字符串分别代表什么<br />
+语法分析：判断<code class="highlighter-rouge">SQL</code>语句是否满足<code class="highlighter-rouge">MySQL</code>语法。</p>
+  </li>
+  <li>
+    <p><strong>优化器</strong><br />
+执行计划生成，索引选择。在表里有多个索引时决定用哪个索引；在一个语句有多表关联时，决定各个表的连接顺序等。优化器得出几个方案后，会选择最好的方案。</p>
+  </li>
+  <li><strong>执行器</strong><br />
+操作存储引擎，返回结果</li>
+</ul>
+
+:ET

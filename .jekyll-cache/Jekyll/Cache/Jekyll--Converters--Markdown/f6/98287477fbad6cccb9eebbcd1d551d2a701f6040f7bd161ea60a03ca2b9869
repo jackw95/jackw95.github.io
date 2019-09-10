@@ -1,0 +1,53 @@
+I"6<ul id="markdown-toc">
+  <li><a href="#04--深入浅出索引上" id="markdown-toc-04--深入浅出索引上">04 | 深入浅出索引（上）</a></li>
+  <li><a href="#索引" id="markdown-toc-索引">索引</a></li>
+</ul>
+
+<h3 id="04--深入浅出索引上">04 | 深入浅出索引（上）</h3>
+
+<h3 id="索引">索引</h3>
+<p><strong>作用：提高数据查询的效率</strong></p>
+
+<p>常用索引模型</p>
+<ul>
+  <li>哈希表</li>
+  <li>有序数组</li>
+  <li>搜索树</li>
+</ul>
+
+<p><strong>哈希表</strong><br />
+<em>以键值对的形式存储，适合于只有等值查询的场景。</em><br />
+用一个哈希函数把<code class="highlighter-rouge">key</code>换算成一个确定的位置，然后把<code class="highlighter-rouge">value</code>这个位置的数组中。一个<code class="highlighter-rouge">key</code>会对应一个数组，数组中会有多个<code class="highlighter-rouge">value</code>，<code class="highlighter-rouge">value</code>并不是有序的。<br />
+查找时先通过哈希函数算出<code class="highlighter-rouge">key</code>，找到具体的数组，然后遍历数组，找到具体的位置。</p>
+
+<p><strong>有序数组</strong><br />
+<em>以有序数组形式存储，等值查询和范围查询场景中性能非常优秀，只适用于静态存储引擎。</em><br />
+仅仅看查询效率，有序数组就是最好的数据结构了，但是，在需要更新数据多的时候就麻烦了，你往中间插入一个记录就必须得挪动后面所有的记录，成本太高。<br />
+所以，有序数组索引只适用于静态存储引擎，比如你要保存2017年某个城市的所有人口信息，这类不会再修改的数据。</p>
+
+<p><strong>搜索树</strong><br />
+<em>以类似二叉树的多叉树来实现。</em></p>
+<ul>
+  <li>二叉搜索树：每个节点的左儿子小于父节点，父节点又小于右儿子。</li>
+  <li>多叉树：每个节点有多个儿子，儿子之间的大小保证从左到右。</li>
+</ul>
+
+<p>在<code class="highlighter-rouge">MySQL</code>中，索引是在存储引擎层实现的，所有并没有同一的索引标准，即不同存储引擎的索引的工作方式并不一样。而即使多个存储引擎支持同一种类型的索引，其底层的实现也可能不同。</p>
+
+<p><code class="highlighter-rouge">InnoDB</code>使用了<code class="highlighter-rouge">B+</code>树索引模型，所有的数据都是存储在<code class="highlighter-rouge">B+</code>树中的。每一个索引在<code class="highlighter-rouge">InnoDB</code>里面对应一棵<code class="highlighter-rouge">B+</code>树，主键索引对应主<code class="highlighter-rouge">B+</code>树。</p>
+
+<ul>
+  <li>主键索引：对应主<code class="highlighter-rouge">B+</code>树，叶子节点存储的是整行数据，也称为聚簇索引</li>
+  <li>非主键索引：每个非主键索引对应一个<code class="highlighter-rouge">B+</code>树，叶子节点存储的是主键的值，也称为二级索引。</li>
+</ul>
+
+<p>基于主键索引和普通索引的查询的区别？</p>
+<ul>
+  <li>如果语句是<code class="highlighter-rouge">select * from T where ID = 500</code>，主键查询方式，即只需要搜索<code class="highlighter-rouge">ID</code>这棵<code class="highlighter-rouge">B+</code>树，叶子节点中有存储整行数据；</li>
+  <li>如果语句是<code class="highlighter-rouge">select * from T where k = 5</code>，普通索引查询方式，则需要先搜索k索引树，得到主键<code class="highlighter-rouge">ID</code>的值为500，再到主键<code class="highlighter-rouge">ID</code>索引树搜索一次，这个过程成为回表。</li>
+</ul>
+
+<p><strong>回到主键索引树搜索的过程，我们称为回表。</strong></p>
+
+<p><em>也就是说：基于非主键索引的查询需要多扫描一颗索引树。</em></p>
+:ET

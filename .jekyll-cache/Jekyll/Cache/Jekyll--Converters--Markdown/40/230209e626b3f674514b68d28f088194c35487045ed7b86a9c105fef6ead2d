@@ -1,0 +1,18 @@
+I"�
+<ul>
+  <li>官网本地下载mysql压缩包，<code class="highlighter-rouge">mysql-8.0.17-linux-glibc2.12-x86_64.tar.xz</code></li>
+  <li>将压缩包上传到服务器
+    <ul>
+      <li>lrzsz工具的安装</li>
+      <li>rz上传</li>
+    </ul>
+  </li>
+  <li>服务器上mysql压缩包的解压
+    <ul>
+      <li>xz解压成tar</li>
+      <li>tar解压</li>
+    </ul>
+  </li>
+  <li></li>
+</ul>
+:ET

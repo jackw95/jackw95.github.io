@@ -1,0 +1,20 @@
+I"u<ul id="markdown-toc">
+  <li><a href="#08--事务到底是隔离的还是不隔离的" id="markdown-toc-08--事务到底是隔离的还是不隔离的">08 | 事务到底是隔离的还是不隔离的？</a></li>
+</ul>
+
+<h3 id="08--事务到底是隔离的还是不隔离的">08 | 事务到底是隔离的还是不隔离的？</h3>
+
+<p><code class="highlighter-rouge">MVCC</code></p>
+
+<p>在<code class="highlighter-rouge">MySQL</code>里，有两个”视图”个概念</p>
+<ol>
+  <li>一个是<code class="highlighter-rouge">view</code>，它是一个用查询语句定义的虚拟表，在调用的时候执行查询语句并生成结果。</li>
+  <li>另一个是<code class="highlighter-rouge">InnoDB</code>在实现<code class="highlighter-rouge">MVCC</code>时用到的一致性读视图，即<code class="highlighter-rouge">consistent read view</code>，用于支持<code class="highlighter-rouge">RC</code>（<code class="highlighter-rouge">Read Committed</code>，读提交）和<code class="highlighter-rouge">RR</code>（<code class="highlighter-rouge">Repeatable Read</code>，可重复读）隔离级别的实现。</li>
+</ol>
+
+<p><code class="highlighter-rouge">MVCC</code></p>
+
+<p><code class="highlighter-rouge">InnoDB</code>里面每个事务有一个唯一的事务<code class="highlighter-rouge">ID</code>，叫做<code class="highlighter-rouge">transaction id</code>，它是在事务开始的时候向<code class="highlighter-rouge">InnoDB</code>的事务系统申请的，是按申请顺序严格递增的。
+而每行数据也是有多个版本的。每次事务更新数据的时候，都会生成一个新的数据版本，并且把<code class="highlighter-rouge">transaction id</code>赋值给这个数据版本的事务<code class="highlighter-rouge">ID</code>，记为<code class="highlighter-rouge">row trx_id</code>。同时，旧的数据版本要保留，并且在新的数据版本中，能够有信息可以直接拿到它。也就是说，数据表中的一行记录，其实可能有多个版本（<code class="highlighter-rouge">row</code>），每个版本有自己的<code class="highlighter-rouge">row trx_id</code>。</p>
+
+:ET

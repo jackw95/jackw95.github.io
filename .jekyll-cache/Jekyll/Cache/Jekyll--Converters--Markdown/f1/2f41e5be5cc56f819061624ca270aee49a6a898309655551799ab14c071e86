@@ -1,0 +1,47 @@
+I"�
+
+<table>
+  <tbody>
+    <tr>
+      <td>### 06</td>
+      <td>全局锁和表锁 ：给表加个字段怎么有这么多阻碍？</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>数据库锁的初衷：处理并发问题</p>
+<ul>
+  <li>全局锁</li>
+  <li>表锁</li>
+  <li>行锁</li>
+</ul>
+
+<p>全局锁：对整个数据库实例加锁。<code class="highlighter-rouge">MySQL</code>提供了一个加全局读锁的方法（FTWRL），<code class="highlighter-rouge">Flush tables with read lock</code>，之后整个数据库处于读锁状态。
+使用场景：全库逻辑备份，就是说把整库每个表都select出来存成文本。</p>
+
+<p>这个库变成只读状态后：</p>
+<ul>
+  <li>如果在主库上备份，备份期间都不能执行更新，业务基本上就得停摆</li>
+  <li>在从库上备份，备份期间从库不能执行主库同步过来的<code class="highlighter-rouge">binlog</code>，导致主从延迟。</li>
+</ul>
+
+<p>表级锁：对整个表进行加锁。加锁<code class="highlighter-rouge">lock tables xxx read/write</code>，释放锁<code class="highlighter-rouge">unlock tables xxx</code>，客户端断开的时候也会自动释放表锁。注意：lock tables语法除了会限制别的线程的读写外，也限制了本线程接下来的操作对象。
+在线程A中使用<code class="highlighter-rouge">lock tables t1 read, t2 write</code>后，其他线程写t1，读写t2都会被阻塞，同时，线程A在执行<code class="highlighter-rouge">unlock tables</code>之前，只能执行读t1，读写t2的操作。</p>
+
+<ul>
+  <li>共享锁：读锁，共享，互不阻塞，多个客户在同一时刻可以读取同一个资源，而互不干扰</li>
+  <li>排他锁：写锁，排他，一个写锁会阻塞其他的写锁和读锁。</li>
+</ul>
+
+<p>排他锁，能确保在给定的时间里，只有一个用户能执行写入，并防止其他用户读取正在写入的同一资源。</p>
+
+<p><code class="highlighter-rouge">MySQL</code>锁粒度</p>
+<ul>
+  <li>表锁。<code class="highlighter-rouge">MySQL</code>最基本的锁策略，也是开销最小的策略。
+  会锁定整张表，一个用户在对表进行写操作（插入、删除、更新等）前，需要先获得写锁，它会阻塞其他用户对该表的所有读写操作。只有没有写锁时，其他读取的用户才能获得读锁，读锁之间互不阻塞。</li>
+  <li>行锁。最大程度地支持并发处理（同时也带来了最大锁开销）。行级锁只在存储引擎层实现，在Server层没有实现。</li>
+  <li></li>
+</ul>
+
+<p>注：在<code class="highlighter-rouge">MySQL</code>的<code class="highlighter-rouge">information_schema</code>库的<code class="highlighter-rouge">innodb_trx</code>表中，可以查到当前执行的事务。</p>
+:ET
